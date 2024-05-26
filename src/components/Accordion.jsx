@@ -37,6 +37,7 @@ function Accordion() {
         </AccordionItem>
       ))}
       <AccordionItem
+        key={4}
         id={4}
         title="Accordion Four"
         setOpen={setOpen}
@@ -50,6 +51,11 @@ function Accordion() {
         <ul>
           <li>one</li>
           <li>two</li>
+          <li>
+            <a href="https://fronthooks.ir/courses/react-course">
+              دوره متخصص ریکت و ریداکس
+            </a>
+          </li>
         </ul>
       </AccordionItem>
     </div>
@@ -63,7 +69,10 @@ function AccordionItem({ setOpen, open, children, id, title }) {
 
   return (
     <div className={`accordion-item ${isOpen ? "accordion__expanded" : ""}`}>
-      <div className="accordion-item__header" onClick={() => setOpen(id)}>
+      <div
+        className="accordion-item__header"
+        onClick={() => setOpen(id === open ? null : id)}
+      >
         <div>{title}</div>
         <ChevronDownIcon
           className="accordion-item__chevron"
