@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const data = [
   {
@@ -40,7 +41,15 @@ function AccordionItem({ item }) {
         className="accordion-item__header"
         onClick={() => setIsOpen((is) => !is)}
       >
-        {item.title}
+        <div>{item.title}</div>
+        <ChevronDownIcon className="accordion-item__chevron"
+        // inline style
+        //   style={{
+        //     width: "1.2rem",
+        //     transition: "all 0.2s ease-in-out",
+        //     rotate: isOpen ? "180deg" : "0deg",
+        //   }}
+        />
       </div>
       <div className="accordion-item__content">{item.text}</div>
     </div>
