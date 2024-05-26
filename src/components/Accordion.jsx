@@ -26,21 +26,45 @@ function Accordion() {
   return (
     <div className="accordion">
       {data.map((item) => (
-        <AccordionItem key={item.id} item={item} setOpen={setOpen} open={open}/>
+        <AccordionItem
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          setOpen={setOpen}
+          open={open}
+        >
+          {item.text}
+        </AccordionItem>
       ))}
+      <AccordionItem
+        id={4}
+        title="Accordion Four"
+        setOpen={setOpen}
+        open={open}
+      >
+        <p>
+          Lorem ipsum dolor, Lorem ipsum dolor sit amet consectetur adipisicing
+          elit. Deleniti alias porro aperiam quo at velit dicta voluptatum quas
+          doloremque nihil, necessitatibus fugit iure,
+        </p>
+        <ul>
+          <li>one</li>
+          <li>two</li>
+        </ul>
+      </AccordionItem>
     </div>
   );
 }
 
 export default Accordion;
 
-function AccordionItem({ item, setOpen , open }) {
-  const isOpen = item.id === open;
+function AccordionItem({ setOpen, open, children, id, title }) {
+  const isOpen = id === open;
 
   return (
     <div className={`accordion-item ${isOpen ? "accordion__expanded" : ""}`}>
-      <div className="accordion-item__header" onClick={() => setOpen(item.id)}>
-        <div>{item.title}</div>
+      <div className="accordion-item__header" onClick={() => setOpen(id)}>
+        <div>{title}</div>
         <ChevronDownIcon
           className="accordion-item__chevron"
           // inline style
@@ -51,7 +75,8 @@ function AccordionItem({ item, setOpen , open }) {
           //   }}
         />
       </div>
-      <div className="accordion-item__content">{item.text}</div>
+      {/* <div className="accordion-item__content">{item.text}</div> */}
+      <div className="accordion-item__content">{children}</div>
     </div>
   );
 }
