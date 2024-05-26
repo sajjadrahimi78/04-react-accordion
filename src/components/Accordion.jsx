@@ -20,10 +20,13 @@ const data = [
 ];
 
 function Accordion() {
+  // state
+  const [open, setOpen] = useState(null);
+
   return (
     <div className="accordion">
       {data.map((item) => (
-        <AccordionItem key={item.id} item={item} />
+        <AccordionItem key={item.id} item={item} setOpen={setOpen} open={open}/>
       ))}
     </div>
   );
@@ -31,24 +34,21 @@ function Accordion() {
 
 export default Accordion;
 
-function AccordionItem({ item }) {
-  // state
-  const [isOpen, setIsOpen] = useState(false);
+function AccordionItem({ item, setOpen , open }) {
+  const isOpen = item.id === open;
 
   return (
     <div className={`accordion-item ${isOpen ? "accordion__expanded" : ""}`}>
-      <div
-        className="accordion-item__header"
-        onClick={() => setIsOpen((is) => !is)}
-      >
+      <div className="accordion-item__header" onClick={() => setOpen(item.id)}>
         <div>{item.title}</div>
-        <ChevronDownIcon className="accordion-item__chevron"
-        // inline style
-        //   style={{
-        //     width: "1.2rem",
-        //     transition: "all 0.2s ease-in-out",
-        //     rotate: isOpen ? "180deg" : "0deg",
-        //   }}
+        <ChevronDownIcon
+          className="accordion-item__chevron"
+          // inline style
+          //   style={{
+          //     width: "1.2rem",
+          //     transition: "all 0.2s ease-in-out",
+          //     rotate: isOpen ? "180deg" : "0deg",
+          //   }}
         />
       </div>
       <div className="accordion-item__content">{item.text}</div>
